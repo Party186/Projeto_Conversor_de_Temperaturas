@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Conversor</title>
+    </head>
+    <header>
+        <img src="imagens/conversor.png" alt="">
+        <h1 id="titulo">CONVERSOR DE TEMPERATURAS</h1>
+    </header>
+    <body>
+        <h1>CONVERSOR DE TEMPERATURAS</h1>
+        <div id="botoes">
+            <br>
+            <label>Celsius</label>
+            <br>
+            <input id="c" placeholder="Celsius">
+            <br>
+            <label>Fahrenheit</label>
+            <br>
+            <input id="f" placeholder="Fahrenheit">
+            <br>
+            <label>Kelvin</label>
+            <br>
+            <input id="k" placeholder="Kelvin">
+            <br>
+            <label>Rankine</label>
+            <br>
+            <input id="r" placeholder="Rankine">
+            <br>
+            <button id="conv">Converter</button>
+            <button id="limp">Limpar</button>
+        </div>
+        <script>
+            /*Conversor*/
+            document.getElementById("conv").onclick = tranformar
+            function tranformar(){
+                let c = document.getElementById("c").value
+                let f = document.getElementById("f").value
+                let k = document.getElementById("k").value
+                let r = document.getElementById("r").value
+                /*Celsius*/
+                if(f === '' && k === '' && r === ''){
+                    k = parseFloat(c) + 273.15
+                    f = parseFloat((c * 1.8) + 32)
+                    r = (parseFloat(c) + 273.15) * 1.8
+                }
+                /*Kelvin*/
+                else if(f === '' && c === '' && r === ''){
+                    f = parseFloat(((k - 273.15) * 9/5) + 32)
+                    c = parseFloat(k - 273.15)
+                    r = parseFloat(k * 1.8)
+                }
+                /*Fahrenheit*/
+                else if(k === '' && c === '' && r === ''){
+                    k = parseFloat((f -32) * 5/9 + 273)
+                    c = parseFloat((f - 32)/1.8)
+                    r = parseFloat((f - 32) + 491.67)
+                }
+                /*Rankine*/
+                else if(k === '' && c === '' && f === ''){
+                    k = parseFloat(r * 5/9)
+                    c = parseFloat((r - 491.67)/1.8000)
+                    f = parseFloat(r - 459.67)
+                }
+                /*Mostrar o valor*/
+                document.getElementById("f").value = parseFloat(f).toFixed(2)
+                document.getElementById("c").value = parseFloat(c).toFixed(2)
+                document.getElementById("k").value = parseFloat(k).toFixed(2)
+                document.getElementById("r").value = parseFloat(r).toFixed(2)
+            }
+            /*Botão de limpar*/
+            document.getElementById("limp").onclick = limpar
+            function limpar(){
+                document.getElementById("c").value = ""
+                document.getElementById("f").value = ""
+                document.getElementById("k").value = ""
+                document.getElementById("r").value = ""
+            }
+        </script>
+    </body>
+</html>
